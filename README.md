@@ -1,9 +1,2 @@
-# My repo for the [Zenit](https://zenit.ksp.sk) competition
-Here you can see all my solutions for each task in 2023
-
-## Questions
-1. Can I use ESbuild (bundler)?
-1. Is the compiled code valid?
-    - Can the generated code for ESM compatibility be there?
-1. Can I use a compiler?
-1. Can I minify the code?
+### This is the recommended way from [Zenit](https://zenit.ksp.sk/help).
+It literally _doesn't_ work, because you cannot stop reading `/dev/stdin` or at least I have not found a way to do so.
