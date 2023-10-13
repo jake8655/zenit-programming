@@ -1,11 +1,7 @@
-process.stdin.setEncoding('utf8');
+import fs from 'fs';
 
-import { readlineSync } from './utils';
+const whole_input = fs.readFileSync('/dev/stdin').toString();
+const input_lines = whole_input.split('\n');
+const nums = input_lines[1]!.split(' ').map(Number);
 
-const main = async () => {
-  const a = await readlineSync();
-  const b = await readlineSync();
-  console.log(+a + +b);
-};
-
-main();
+console.log(nums.reduce((a, b) => a + b, 0));
