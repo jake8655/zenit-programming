@@ -1,15 +1,13 @@
-process.stdin.setEncoding('utf8');
-
-import { readlineSync } from './utils';
+import fs from 'fs';
 
 const main = async () => {
-  const numberOfMoves = +(await readlineSync());
+  const input = fs.readFileSync('/dev/stdin').toString().split('\n');
+  input.shift();
   let final = 0;
 
-  for (let i = 0; i < numberOfMoves; i++) {
-    const move = +(await readlineSync());
-    final += move;
-  }
+  input.forEach(v => {
+    final += +v;
+  });
 
   console.log(final);
 };
