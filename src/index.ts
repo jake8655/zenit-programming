@@ -1,8 +1,7 @@
 import fs from 'fs';
 
-const input = fs.readFileSync('/dev/stdin').toString();
-const lines = input.split('\n');
-const a = parseInt(lines[0]!);
-const b = parseInt(lines[1]!);
-
-console.log(+a + +b);
+const input = fs.readFileSync('input').toString().split('\n');
+const n = +input[0]!.split(' ')[0]!;
+const k = +input[0]!.split(' ')[1]!;
+const x = k === 100 ? -1 : n / (1 - k / 100);
+console.log(x);
