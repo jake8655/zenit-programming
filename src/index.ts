@@ -1,24 +1,35 @@
-process.stdin.setEncoding('utf8');
+import fs from 'fs';
 
-import { readlineSync } from './utils';
+const input = fs.readFileSync('/dev/stdin').toString().split('\n') as [
+  string,
+  string,
+];
 
-const main = async () => {
-  const [firstCapacity, secondCapacity] = (await readlineSync())
-    .split(' ')
-    .map(Number) as [number, number];
-  const items = (await readlineSync()).split(' ').map(Number);
+const [firstCapacity, secondCapacity] = input[0]
+  .split(' ')
+  .map(val => +val) as [number, number];
+const [firstWeight, secondWeight, thirdWeight] = input[1]
+  .split(' ')
+  .map(val => +val) as [number, number, number];
 
-  let [firstCapacityCopy, secondCapacityCopy] = [firstCapacity, secondCapacity];
-  for (const item of items) {
-    firstCapacityCopy -= item;
-    if (firstCapacityCopy < 0) {
-      firstCapacityCopy += item;
-      secondCapacityCopy -= item;
-      if (secondCapacityCopy < 0) {
-        console.log('Nie');
+const calculate = () => {
+  for (let i = 0; i < 2; i++) {
+    for (let j = 0; j < 2; j++) {
+      for (let k = 0; k < 2; k++) {
+        if (
+          i * firstWeight + j * secondWeight + k * thirdWeight <=
+            firstCapacity &&
+          (1 - i) * firstWeight +
+            (1 - j) * secondWeight +
+            (1 - k) * thirdWeight <=
+            secondCapacity
+        ) {
+          return true;
+        }
       }
     }
   }
+  return false;
 };
 
-main();
+console.log(calculate() ? 'Ano' : 'Nie');
