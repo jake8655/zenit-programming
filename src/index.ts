@@ -7,33 +7,21 @@ const [, flavorsPerDay] = input[0]!.split(' ').map(val => +val) as [
 ];
 const likeness = input[1]!.split(' ').map(val => +val);
 
-let groups: number[][] = [];
+const groups: number[][] = [];
 
-if (likeness.length % flavorsPerDay === 0) {
-  for (let i = 0; i < likeness.length; i++) {
-    const group: number[] = [];
-    for (let j = i; j < i + flavorsPerDay; j++) {
-      group.push(likeness[j]!);
+let bad = false;
+for (let i = 0; i < likeness.length; i++) {
+  const group: number[] = [];
+  for (let j = i; j < i + flavorsPerDay; j++) {
+    if (j >= likeness.length) {
+      bad = true;
+      break;
     }
+    group.push(likeness[j]!);
   }
-} else {
-  for (let i = 0; i < likeness.length; i++) {
-    const group: number[] = [];
-    for (let j = i; j < i + flavorsPerDay; j++) {
-      if (j > likeness.length) {
-        group.push(likeness[j - likeness.length]!);
-        break;
-      }
-      group.push(likeness[j]!);
-    }
-    groups.push(group);
-  }
+  if (bad) break;
+  groups.push(group);
 }
-
-groups = groups.filter(group => {
-  group = group.filter(Boolean);
-  return group.length === flavorsPerDay;
-});
 
 const maxGroups = groups.map(group => {
   return Math.max(...group);
