@@ -6,7 +6,7 @@ const shirts = input[1]!.split(' ');
 const combinations: number[] = [];
 
 for (let i = 0; i < shirts.length; i++) {
-  const different = new Set<string>();
+  const different = new Set<string>([shirts[i]!]);
   const sequence: string[] = [shirts[i]!];
 
   for (let j = i + 1; j < shirts.length; j++) {
@@ -16,13 +16,7 @@ for (let i = 0; i < shirts.length; i++) {
       break;
     }
 
-    if (shirts[i] === shirts[j]) {
-      different.add(shirts[i]!);
-    }
-
-    different.add(shirts[i]!);
     different.add(shirts[j]!);
-
     sequence.push(shirts[j]!);
   }
 
